@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import { isRTL } from '@/lib/translation'
@@ -70,14 +71,15 @@ export default function Footer() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center"
           >
-            <div className="flex items-center gap-3 mb-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/icon.svg"
+            <div className="mb-4">
+              <Image
+                src="/logo.png"
                 alt="Xentio Digital"
-                className="h-10 w-auto object-contain"
+                width={370}
+                height={200}
+                className="h-14 md:h-16 w-auto object-contain dark:brightness-0 dark:invert"
+                sizes="200px"
               />
-              <h3 className="text-2xl font-bold gradient-text">Xentio Digital</h3>
             </div>
             <p className="text-muted-enhanced mb-6 leading-relaxed">
               {t('tagline')}

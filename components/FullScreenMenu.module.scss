@@ -182,12 +182,14 @@
 
 .logoImg {
   display: block;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  height: 44px;
+  width: auto;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  filter: brightness(0) invert(1);
+
+  @media (max-width: 767px) {
+    height: 38px;
+  }
 }
 
 .navMain {

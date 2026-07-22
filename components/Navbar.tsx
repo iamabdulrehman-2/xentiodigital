@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { useState, useEffect } from 'react'
 import ThemeToggle from './ThemeToggle'
@@ -31,18 +32,16 @@ export default function Navbar() {
       <div className="site-header__main">
         <div className={`site-header__row container-fluid flex justify-between items-center h-16 md:h-20 px-4 sm:px-6 lg:px-8 ${rtl ? 'flex-row-reverse' : ''}`}>
           <div className="site-header__col -left flex items-center">
-            <Link href={`/${locale}`} className="site-header__logo flex items-center gap-0.5" aria-label="Home">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/icon.svg"
+            <Link href={`/${locale}`} className="site-header__logo flex items-center" aria-label="Home">
+              <Image
+                src="/logo.png"
                 alt="Xentio Digital"
-                className="h-10 md:h-12 w-auto object-contain"
-                fetchPriority="high"
-                decoding="async"
+                width={370}
+                height={200}
+                priority
+                className="h-9 sm:h-10 md:h-12 w-auto object-contain"
+                sizes="(max-width: 640px) 130px, (max-width: 768px) 150px, 180px"
               />
-              <span className="text-white font-bold text-sm md:text-base tracking-wide leading-none">
-                Xentio Digital
-              </span>
             </Link>
           </div>
 

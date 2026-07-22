@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './FullScreenMenu.module.scss'
@@ -101,12 +102,13 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
               variants={{ open: { transition: { staggerChildren: 0.06 } } }}
             >
               <Link href={`/${locale}`} className={styles.logo} onClick={onClose}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/icon.svg"
+                <Image
+                  src="/logo.png"
                   alt="Xentio Digital"
+                  width={370}
+                  height={200}
                   className={styles.logoImg}
-                  decoding="async"
+                  sizes="150px"
                 />
               </Link>
 

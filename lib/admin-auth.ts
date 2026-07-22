@@ -1,6 +1,6 @@
 'use client'
 
-import { getAuth, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, signOut as fbSignOut } from 'firebase/auth'
+import { getAuth, setPersistence, browserLocalPersistence, signInWithEmailAndPassword, signOut as fbSignOut, type Auth } from 'firebase/auth'
 import { getFirebaseApp } from '@/lib/firebase'
 
 export type AdminUser = {
@@ -8,12 +8,19 @@ export type AdminUser = {
   email: string | null
 }
 
-const auth = getAuth(getFirebaseApp())
+let _auth: Auth | null = null
+
+function getAdminAuth(): Auth {
+  if (_auth) return _auth
+  _auth = getAuth(getFirebaseApp())
+  return _auth
+}
+
 let _persistenceReady = false
 
 async function ensurePersistence() {
   if (_persistenceReady) return
-  await setPersistence(auth, browserLocalPersistence)
+  await setPersistence(getAdminAuth(), browserLocalPersistence)
   _persistenceReady = true
 }
 
@@ -22,7 +29,7 @@ export async function signIn(email: string, password: string): Promise<AdminUser
   
   let cred
   try {
-    cred = await signInWithEmailAndPassword(auth, email, password)
+    cred = await signInWithEmailAndPassword(getAdminAuth(), email, password)
   } catch (err: any) {
     // Firebase Auth errors
     const code = err?.code || ''
@@ -49,7 +56,7 @@ export async function signIn(email: string, password: string): Promise<AdminUser
 
   if (!res.ok) {
     // Not an admin / invalid token / server misconfig — ensure client signs out too
-    await fbSignOut(auth).catch(() => {})
+    await fbSignOut(getAdminAuth()).catch(() => {})
     const msg = (await res.json().catch(() => null)) as any
     const errorMsg = msg?.error || 'Admin login failed'
     if (errorMsg.includes('Not authorized') || errorMsg.includes('admin only')) {
@@ -63,7 +70,7 @@ export async function signIn(email: string, password: string): Promise<AdminUser
 
 export async function signOut(): Promise<void> {
   await fetch('/api/admin/session', { method: 'DELETE' }).catch(() => {})
-  await fbSignOut(auth).catch(() => {})
+  await fbSignOut(getAdminAuth()).catch(() => {})
 }
 
 export async function getCurrentAdmin(): Promise<AdminUser | null> {

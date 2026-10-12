@@ -1,12 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import styles from './ProfessionalServicesSection.module.scss'
-
-const SECTION_IMAGE =
-  'https://www.digitalsilk.com/wp-content/uploads/2024/09/image-104-1.png'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -52,7 +48,6 @@ interface Props {
   title: string
   titleHighlight: string
   titleSuffix: string
-  imageAlt: string
   items: Array<{ title: string; description: string }>
 }
 
@@ -60,7 +55,6 @@ export default function ProfessionalServicesSectionClient({
   title,
   titleHighlight,
   titleSuffix,
-  imageAlt,
   items,
 }: Props) {
   const sectionRef = useRef<HTMLElement>(null)
@@ -73,7 +67,7 @@ export default function ProfessionalServicesSectionClient({
       aria-labelledby="professional-services-heading"
     >
       <div className={styles.container}>
-        {/* Heading row: animated title + image */}
+        {/* Heading row: animated title */}
         <motion.div
           className={styles.headingRow}
           initial="hidden"
@@ -100,23 +94,6 @@ export default function ProfessionalServicesSectionClient({
               </motion.span>
             ) : null}
           </h2>
-          <motion.div
-            className={styles.imageWrap}
-            variants={fadeUp}
-            custom={2}
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          >
-            <Image
-              src={SECTION_IMAGE}
-              alt={imageAlt}
-              width={400}
-              height={192}
-              sizes="(max-width: 767px) 120px, 200px"
-              className={styles.imageSrc}
-              priority={false}
-            />
-          </motion.div>
         </motion.div>
 
         {/* Gradient separator — line draw */}

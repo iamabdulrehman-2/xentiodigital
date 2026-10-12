@@ -414,59 +414,6 @@ body {
 
 /* Hero section is always dark — no light mode overrides */
 
-/* Hero client logos bar — horizontal scrolling slider at bottom (DigitalSilk-style) */
-.-client-slides {
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  column-gap: 10vmin;
-  height: 100px;
-  margin-top: -1px;
-  background-color: #03042a;
-  z-index: 1;
-}
-
-/* When inside hero-bg_wrap: pin to bottom of wrap */
-.hero-bg_wrap .-client-slides {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: none;
-}
-
-.-client-slides .slider-css {
-  column-gap: 10vmin;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-  flex: none;
-}
-
-@media (max-width: 1023px) {
-  .-client-slides .slider-css {
-    column-gap: 50px;
-  }
-}
-
-.-client-slides.paused .slider-css {
-  animation-play-state: paused;
-}
-
-.-client-slides .m-slide__media img {
-  display: block;
-  height: auto;
-  max-height: 55px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
-}
-
-.-client-slides .client-item {
-  flex: 0 0 auto;
-}
-
 @keyframes scroll {
   from {
     transform: translateX(0);

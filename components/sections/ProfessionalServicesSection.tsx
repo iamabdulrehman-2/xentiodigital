@@ -7,7 +7,6 @@ export default async function ProfessionalServicesSection() {
   const title = t('title')
   const titleHighlight = t('titleHighlight')
   const titleSuffix = t('titleSuffix')
-  const imageAlt = t('imageAlt')
 
   const rawItems = t.raw('items') as Array<{ title: string; description: string }> | undefined
   const items = Array.isArray(rawItems) && rawItems.length > 0 ? rawItems : []
@@ -17,7 +16,6 @@ export default async function ProfessionalServicesSection() {
       title={title}
       titleHighlight={titleHighlight}
       titleSuffix={titleSuffix}
-      imageAlt={imageAlt}
       items={items}
     />
   )

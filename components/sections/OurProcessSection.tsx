@@ -1,24 +1,12 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useHorizontalProgress } from '@/hooks/useHorizontalProgress'
 import styles from './OurProcessSection.module.scss'
-
-const DS = 'https://www.digitalsilk.com/wp-content/uploads/2024/06'
-
-const PROCESS_IMAGES = [
-  { src: `${DS}/iStock-932335774-2.png`, alt: 'Web strategy and research' },
-  { src: `${DS}/iStock-932335774-3.png`, alt: 'Planning and information architecture' },
-  { src: `${DS}/iStock-932335774-4.png`, alt: 'Creative design' },
-  { src: `${DS}/responsive.png`, alt: 'Responsive development' },
-  { src: `${DS}/quality.png`, alt: 'Quality assurance' },
-  { src: `${DS}/launch.png`, alt: 'Launch and optimization' },
-]
 
 const FALLBACK_STEPS: Array<{
   title: string
@@ -102,8 +90,6 @@ export default function OurProcessSection() {
     items: string[]
   }> | undefined
   const steps = Array.isArray(rawSteps) && rawSteps.length >= 6 ? rawSteps : FALLBACK_STEPS
-  const stepAlts = t.raw('stepAlts') as string[] | undefined
-  const imageAlts = Array.isArray(stepAlts) && stepAlts.length >= 6 ? stepAlts : PROCESS_IMAGES.map((p) => p.alt)
 
   const { progress, activeIndex } = useHorizontalProgress(scrollerRef, steps.length)
 
@@ -176,20 +162,6 @@ export default function OurProcessSection() {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
               >
-                <div className={styles.media}>
-                  <div className={styles.imgWrap}>
-                    <Image
-                      src={PROCESS_IMAGES[index]?.src ?? PROCESS_IMAGES[0].src}
-                      alt={imageAlts[index] ?? step.title}
-                      width={210}
-                      height={149}
-                      priority={index < 2}
-                      loading={index < 2 ? 'eager' : 'lazy'}
-                      sizes="(max-width: 768px) 80vw, (max-width: 1280px) 60vw, 40vw"
-                      className={styles.img}
-                    />
-                  </div>
-                </div>
                 <div className={styles.content}>
                   <motion.h3
                     className={styles.slideTitle}

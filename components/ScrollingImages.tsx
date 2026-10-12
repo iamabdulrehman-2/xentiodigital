@@ -29,20 +29,6 @@ const COLUMNS_DARK: { images: string[] }[] = [
 ]
 
 
-const HERO_CLIENT_LOGOS = [
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/xerox_logo-1.png', alt: 'Xerox', width: 91, height: 21 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/Sony-1.png', alt: 'Sony', width: 106, height: 19 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/PG_logo-1.png', alt: 'P&G', width: 63, height: 27 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/nyc_logo-1.png', alt: 'NYC', width: 85, height: 29 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/nfl_logo-1.png', alt: 'NFL', width: 42, height: 55 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/MicrosoftTeams-image-2.png', alt: 'Microsoft', width: 46, height: 45 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/mcds_logo-1.png', alt: "McDonald's", width: 65, height: 55 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/grenco_logo-1.png', alt: 'Grenco', width: 103, height: 35 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/g2_logo-1.png', alt: 'G2', width: 49, height: 55 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/enchant_logo-1.png', alt: 'Enchant', width: 133, height: 31 },
-  { src: 'https://www.digitalsilk.com/wp-content/uploads/2024/05/BRU_Logo-1.png', alt: 'BRU', width: 125, height: 27 },
-]
-
 export default function ScrollingImages() {
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
@@ -103,27 +89,6 @@ export default function ScrollingImages() {
         </AnimatePresence>
       </div>
       <div className="hero-bg-gradient_overlay" aria-hidden />
-
-      {/* Client logos bar — inside hero-bg_wrap, at bottom */}
-      <div className="-client-slides is-playing" aria-hidden>
-        <div className="m-slider__wrapper slider-css">
-          {[...HERO_CLIENT_LOGOS, ...HERO_CLIENT_LOGOS].map((logo, i) => (
-            <div key={i} className="m-slide client-item">
-              <div className="m-slide__media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  decoding="async"
-                  fetchPriority="high"
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={logo.width}
-                  height={logo.height}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }
